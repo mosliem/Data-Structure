@@ -1,0 +1,73 @@
+//this is an implementation  with the concept of Adjacency list 
+/*
+struct vertix{} to set the construction of node and has a value and the cost.
+struct adjList {} to set the construction of the list 
+deleted // struct edge{} to set the construction og the edge and save the value U,C that are belongs to the edge.
+class graph
+    1-con graph() constructor to allocate the list to null and set the number of the vertix 
+	2-listOfAdj[] // save the adjacent of every vertix
+    3-addEdge()==> which set the value of the vertix and the adjacent
+	4- print() to print the graph in list of adjacents
+*/
+#include <iostream>
+using namespace std;
+struct vertix
+{
+	int val;
+	vertix* next;
+};
+struct adjlist
+{
+	vertix* edge;
+};
+class graph
+{
+private:
+	int N; //number of vertix
+public:
+	adjlist* listOfVer;
+	graph(int N)
+	{
+		this->N = N;
+	    listOfVer = new adjlist [N];
+		for (int i = 0; i < N; i++)
+			listOfVer[i].edge = NULL;
+	}
+	void addEdge(int src , int dest)
+	{
+		vertix *node = new vertix;
+		node->val = dest;
+		node->next = NULL;
+		node->next = listOfVer[src].edge;
+		listOfVer[src].edge = node;
+	}
+	void print()
+	{
+		for (int i = 0; i < N; i++)
+		{
+			vertix* curr = listOfVer[i].edge;
+			cout << "The adjacent vertix of " << i << ":" << endl << "head";
+			while (curr) 
+			{
+				cout << " --> ";
+				cout << curr->val;
+				curr = curr->next;
+			}
+			cout << endl;
+		}
+	}
+
+};
+int main()
+{
+	graph gh(5);
+	gh.addEdge(0, 1);
+	gh.addEdge(0, 4);
+	gh.addEdge(1, 2);
+	gh.addEdge(1, 3);
+	gh.addEdge(1, 4);
+	gh.addEdge(2, 3);
+	gh.addEdge(3, 4);
+	gh.addEdge(4, 1);
+	gh.print();
+}
