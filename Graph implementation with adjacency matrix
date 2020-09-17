@@ -1,0 +1,67 @@
+#include <iostream>
+#include <list>
+using namespace std;
+int n;
+void addEdge(int src, int dest, bool **arr)
+{
+	arr[src][dest] = true;
+}
+void print(bool** arr)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (arr[i][j])
+				cout << i << " -> " << j << endl;
+		}
+	}
+}
+void deleteEdge(int src , int dest , bool **arr)
+{
+	arr[src][dest] = false;
+}
+int main()
+{
+	
+	cout << "enter num of vertices :";
+	cin >> n;
+	int src, dest;
+	bool ** a = new bool * [n];
+	for (int i = 0; i < n; i++)
+		a[i] = new bool [n];
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			a[i][j] = false;
+	while (true)
+	{
+		cout << "press 1-add edge \n 2-stop\n";
+		int ch;
+		cin >> ch;
+		if (ch == 1)
+		{
+			cin >> src >> dest;
+			addEdge(src, dest, a);
+		}
+		else
+			break;
+	}
+	print(a);//printing the graphs edges
+	cout << "if you want to delete an edge:\n 1- to delete \n 2- to exit"<<endl;
+	int ch = 0;
+	cout << "Enter ch: ";
+	cin >> ch;
+	while (true)
+	{
+		if (ch == 1)
+		{
+			cout << "Enter the edge: ";
+			cin >> src >> dest;
+			deleteEdge(src, dest, a);
+			cout << "The New graph : " << endl;
+			print(a);
+		}
+		else
+			exit(0);
+	}
+}
