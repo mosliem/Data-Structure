@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+	node* next;
+	int data;
+};
+class linkedlist
+{
+	node* head, * tail;
+public:
+	linkedlist()
+	{
+		head = tail = NULL;
+	}
+	void insertion(int val)
+	{
+		node* newnode = new node;
+		newnode->data = val;
+		if (head == NULL)
+		{
+			head = tail = newnode;
+			newnode->next = NULL;
+		}
+		else
+		{
+			tail->next = newnode;
+			tail = newnode;
+			tail->next = NULL;
+		}
+    }
+	void print()
+	{
+		node* curr = head;
+		while (curr != NULL)
+		{
+			cout << curr->data << " ";
+			curr = curr->next;
+		}
+		cout << endl;
+	}
+	void insertionSort()
+	{
+		head = insertionSort(head);
+	}
+private:
+	node* insertionSort(node *head)
+	{
+		node* curr = head;
+		node* sHead = NULL;
+		while (curr!= NULL)
+		{
+			node* next = curr->next;// saving the next of current node
+			node* newnode = curr;//the node we want to insert it sorted
+			if (sHead == NULL || sHead->data > newnode->data)//in case that the inserted node is smaller than the head
+			{
+				newnode->next = sHead;
+				sHead = newnode;
+			}
+			else
+			{
+				node* temp = sHead;
+				while (temp->next != NULL && newnode->data > temp->next->data)//comparing curr "newnode" with the node until we found that the curr isn't bigger than the next
+				{
+					temp= temp->next;
+				}
+				newnode->next = temp->next;
+				temp->next = newnode;
+			}
+			curr = next;
+		}
+		return sHead;
+	}
+	
+};
+int main()
+{
+	linkedlist s;
+	s.insertion(10);
+	s.insertion(5);
+	s.insertion(18);
+	s.insertion(2);
+	cout << "before : " << endl;
+	s.print();
+	s.insertionSort();
+	cout << "after : " << endl;
+	s.print();
+}
