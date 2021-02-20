@@ -1,0 +1,104 @@
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+#define ll long long
+
+struct node
+{
+	int data;
+	node* next;
+};
+
+class SlinkedList
+{
+private:
+	node* head, * tail;
+	int len = 0;
+public:
+	SlinkedList()
+	{
+		head = NULL;
+		tail = NULL;
+	}
+
+	void insert(int data)
+	{
+		node* temp = new node;
+		temp->data = data;
+		if (head == NULL)
+		{
+			head = temp;
+			tail = temp;
+			tail ->next = NULL;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+			tail->next = NULL;
+		}
+		len++;
+	}
+	
+
+
+void Bubblesort()
+{
+
+
+	for (int i = 0; i < len; i++)
+	{
+		node* curr = head, * currNext = curr->next; //positioning pointers on the list 
+		for (int j = 0; j < len - i-1 ; j++)
+		{
+			int temp = 0;
+			if ((curr->data) > (currNext->data))
+			{
+				//swapping
+				temp = currNext->data;
+				currNext->data = curr->data;
+				curr->data = temp;
+			}
+			curr = curr->next;
+			currNext = curr->next;
+		}
+
+	}
+
+}
+	
+	void print()
+	{
+		if (head != NULL)
+		{
+			node* curr = head;
+			while (curr != NULL)
+			{
+				cout << curr->data<<" ";
+				curr = curr->next;
+			}
+			cout << endl;
+		}
+		else
+			cout << "NO data is saved" << endl;
+	}
+};
+
+int main()
+{    
+	SlinkedList op;
+  //inseting part
+	op.insert(14);
+	op.insert(6);
+	op.insert(18);
+	op.insert(20);
+	op.insert(2);
+	op.insert(9);
+  
+	op.print(); // print original list 
+
+	op.Bubblesort(); // sorting the list
+	op.print(); // print sorted list 
+
+	
+}

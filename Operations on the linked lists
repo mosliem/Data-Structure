@@ -1,0 +1,163 @@
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+#define ll long long
+
+/*
+operation on singly linked list 
+- void insert(): insertion of  a value to the list
+- void print() : printing the whole list
+-  -void search(int x): search about value 
+- void moveToFirst(int x): move a node with its value to the start of the list and changing the head.
+- void moveToEnd(int x): move a node with its value to the end  of the list and changing the tail.
+- void findTheMin() : find the minimum value of the list 
+- void findTheMax(): find the maximum of the list .
+*/
+
+
+struct node
+{
+	int data;
+	node* next;
+};
+
+class SlinkedList
+{
+private:
+	node* head, * tail;
+	int len = 0;
+public:
+	SlinkedList()
+	{
+		head = NULL;
+		tail = NULL;
+	}
+
+	void insert(int data)
+	{
+		node* temp = new node;
+		temp->data = data;
+		if (head == NULL)
+		{
+			head = temp;
+			tail = temp;
+			tail ->next = NULL;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+			tail->next = NULL;
+		}
+		len++;
+	}
+	void search(int x)
+	{
+		node* curr = head;
+		int num = 0;
+		while (curr != NULL)
+		{
+			num++;
+			if (curr->data == x)
+			{
+				cout << "value was found in node number "<< num << endl;
+				return;
+			}
+			curr = curr->next;
+		}
+		cout << "value wasn't found" << endl;
+	}
+	void moveToFirst(int x)
+	{
+		node* curr = head;
+		node* pre = NULL;
+		while (curr->data != x)
+		{
+			pre = curr;
+			curr = curr->next;
+		}
+		pre->next = curr->next;
+		curr->next = head;
+		head = curr;
+		cout << "Node " << x << " is moved to the first place" << endl;
+
+	}
+	void moveToEnd(int x)
+	{
+		node* curr = head;
+		node* pre = NULL;
+		while (curr->data != x)
+		{
+			pre = curr;
+			curr = curr->next;
+		}
+		pre->next = curr->next;
+		tail->next = curr;
+		tail = curr;
+	 	curr->next = NULL;
+		cout << "Node " << x << " is moved to the end" << endl;
+	}
+	void findTheMin()
+	{
+		node* curr = head;
+		int min = curr->data, num = 0;
+		while (curr -> next != NULL)
+		{
+			curr = curr->next;
+			if (curr ->data < min)
+				min = curr->data;
+		}
+		cout <<"The Minmum value is  "<<min << endl;
+	}
+	void findTheMax()
+	{
+		node* curr = head;
+		int max = curr->data, num = 0;
+		while (curr->next != NULL)
+		{
+			curr = curr->next;
+			if (curr->data > max)
+				max = curr->data;
+		}
+		cout <<"The maxmum value is  "<<max << endl;
+	}
+	void print()
+	{
+		if (head != NULL)
+		{
+			node* curr = head;
+			while (curr != NULL)
+			{
+				cout << curr->data<<" ";
+				curr = curr->next;
+			}
+			cout << endl;
+		}
+		else
+			cout << "NO data is saved" << endl;
+	}
+};
+
+int main()
+{    
+	SlinkedList op;
+	op.insert(14);
+	op.insert(6);
+	op.insert(18);
+	op.insert(20);
+	op.insert(2);
+	op.insert(9);
+	op.insert(11);
+	op.print();
+	op.search(10);
+	op.search(20);
+	op.moveToFirst(2); // move node with the value 2 to the first
+	op.print();
+	op.moveToEnd(18); // move node with value 16 to the end 
+	op.print();
+	op.findTheMin(); // find the minmum value in the list 
+	op.findTheMax();
+}
+
+
+

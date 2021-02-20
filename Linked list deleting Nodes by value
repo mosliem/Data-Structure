@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+#define ll long long
+
+struct node
+{
+	int data;
+	node* next;
+};
+
+class SlinkedList
+{
+private:
+	node* head, * tail;
+	int len = 0;
+public:
+	SlinkedList()
+	{
+		head = NULL;
+		tail = NULL;
+	}
+
+	void insert(int data)
+	{
+		node* temp = new node;
+		temp->data = data;
+		if (head == NULL)
+		{
+			head = temp;
+			tail = temp;
+			tail ->next = NULL;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+			tail->next = NULL;
+		}
+		len++;
+	}
+	
+	// delete a data with its node
+	
+	void deleteData(int n)
+	{
+		node* curr = head, * prev = NULL;
+
+		while (curr != NULL)
+		{
+			if (curr->data == n)
+			{
+				prev->next = curr->next;
+				delete curr;
+				break;
+			}
+			prev = curr;
+			curr = curr->next;
+		}
+		len--;
+	}
+
+	
+	
+
+	void print()
+	{
+		if (head != NULL)
+		{
+			node* curr = head;
+			while (curr != NULL)
+			{
+				cout << curr->data<<" ";
+				curr = curr->next;
+			}
+			cout << endl;
+		}
+		else
+			cout << "NO data is saved" << endl;
+	}
+};
+
+int main()
+{    
+	SlinkedList op;
+	op.insert(14);
+	op.insert(6);
+	op.insert(18);
+	op.insert(20);
+	op.insert(2);
+	op.insert(9);
+	op.print();
+	op.deleteData(18);//deleting node that saves value 18
+	op.print();
+	
+}

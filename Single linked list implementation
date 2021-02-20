@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+#define ll long long
+
+ // this linked list stores every name and its age in one node 
+struct node
+{
+	string name; 
+	int data;
+	node* next;
+};
+
+class SlinkedList
+{
+private:
+	node* head, * tail;
+public:
+	SlinkedList()
+	{
+		head = NULL;
+		tail = NULL;
+	}
+
+	void insert(string name,int age)
+	{
+		node* temp = new node;
+		temp->name = name;
+		temp->data = age;
+		if (head == NULL)
+		{
+			head = temp;
+			tail = temp;
+			tail ->next = NULL;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+			tail->next = NULL;
+		}
+	}
+
+	void print()
+	{
+		if (head != NULL)
+		{
+			node* curr = new node;
+			curr = head;
+			while (curr != NULL)
+			{
+				cout << "name : "<<curr->name << " " <<"age : "<< curr->data << endl;
+				curr = curr->next;
+			}
+		}
+		else
+			cout << "NO data is saved" << endl;
+	}
+};
+
+int main()
+{    
+	int n;
+	string s;
+	cout << "enter E to exit" << endl;
+	cout << "enter name and age : " << endl;
+	SlinkedList op;
+
+	while (true) // inserting names and ages .. without any limits on the number of input 
+	{
+		cin >> s;
+		if (s != "E")
+		{
+			cin >> n;
+			op.insert(s, n);
+		}
+		else
+			break;
+	}
+	op.print();
+}
